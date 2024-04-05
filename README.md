@@ -1,5 +1,5 @@
 # Kelompok3_SkenarioTest
-Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi ftgo untuk memenuhi tugas mata kuliah PPLBO
+Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi ftgo untuk memenuhi tugas mata kuliah PPLBO.
 [Dokumen Test Scenario yang Disertai Screnshoot](https://docs.google.com/document/d/1nNGpEz_nv-it_T1A0c5cktP_RIPALVIdeOv4_WXEEfY/edit?usp=sharing)
 
 
