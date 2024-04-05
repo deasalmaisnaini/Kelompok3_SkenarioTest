@@ -10,7 +10,7 @@ Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi
 | TC04 |Membuat Order dengan Menu tidak terdaftar|{  "consumerId": 1,  "deliveryAddress": {    "city": "cimahi",    "state": "jabar",    "street1": "antapani",    "street2": "jatiwangi",    "zip": "40291"  },  "deliveryTime": "2024-04-05T17:01:35.615Z",  "lineItems": [    {      "menuItemId": "3",      "quantity": 50    }  ],  "restaurantId": 1}|{  "timestamp": "2024-04-05T09:03:38.056+0000",  "status": 500,  "error": "Internal Server Error",  "message": "Invalid menu item id 3",  "path": "/orders"}|PASS|-
 |TC05|Membuat Order tanpa memilih Menu apapun | {  "consumerId": 1,  "deliveryAddress": {    "city": "cimahi",    "state": "jabar",    "street1": "antapani",    "street2": "jatiwangi",    "zip": "40291"  },  "deliveryTime": "2024-04-05T17:01:35.615Z",  "lineItems": [  ],  "restaurantId": 1}|{  "orderId": 8}|FAIL|-
 |TC06|Memesan Menu dengan jumlah kurang dari 1|{  "consumerId": 1,  "deliveryAddress": {    "city": "cimahi",    "state": "jabar",    "street1": "antapani",    "street2": "jatiwangi",    "zip": "40291"  },  "deliveryTime": "2024-04-05T17:01:35.615Z",  "lineItems": [    {      "menuItemId": "1",      "quantity": -50    }  ],  "restaurantId": 1}|{  "orderId": 9}|FAIL|-
-|TC07|Mendapatkan Order yang sudah terdaftar | orderId = 1|-|PASS|-
+|TC07|Mendapatkan Order yang sudah terdaftar | orderId = 1|{  "orderId": 1,  "state": "APPROVED",  "orderTotal": "15000.00"}|PASS|-
 |TC08|Mendapatkan Order yang tidak terdaftar | orderId = 100|-|PASS|-
 
 # Perubahan Kode
