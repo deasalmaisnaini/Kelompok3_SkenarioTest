@@ -12,6 +12,8 @@ Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi
 |TC06|Memesan Menu dengan jumlah kurang dari 1|Sudah ada restoran yang tersimpan, Sudah ada menu pada restoran terpilih yang tersimpan, Consumer sudah terdaftar|{  "consumerId": 1,  "deliveryAddress": {    "city": "cimahi",    "state": "jabar",    "street1": "antapani",    "street2": "jatiwangi",    "zip": "40291"  },  "deliveryTime": "2024-04-05T17:01:35.615Z",  "lineItems": [    {      "menuItemId": "1",      "quantity": -50    }  ],  "restaurantId": 1}|{  "orderId": 9}|FAIL|-
 |TC07|Mendapatkan Order yang sudah terdaftar |Sudah ada Order yang tersimpan| orderId = 1|{  "orderId": 1,  "state": "APPROVED",  "orderTotal": "15000.00"}|PASS|-
 |TC08|Mendapatkan Order yang tidak terdaftar |-| orderId = 100|-|PASS|-
+|TC09|Mengubah order dengan orderId dan id menu yang terdaftar pada sistem|Sudah Membuat order | orderId = 1 {"revisedOrderLineItems": [{"menuItemId": "2","quantity": 10}]}| {"orderId" : 3, "state" : "APPROVAL_PENDING","orderTotal":"300000"}|PASS| karena statusnya Approval_Pending sehinggga orderTotal masih mengandung total dari pesanan sebelumnya| 
+
 
 # Perubahan Kode
 | TC ID| Kesalahan | Letak Kesalahan |Perubahan Kode|
