@@ -68,6 +68,10 @@ public class OrderService {
   @Transactional
   public Order createOrder(long consumerId, long restaurantId, DeliveryInformation deliveryInformation,
                            List<MenuItemIdAndQuantity> lineItems) {
+    if (lineItems.isEmpty()) {
+        throw new IllegalArgumentException("List of line items cannot be empty");
+    }
+    
     Restaurant restaurant = restaurantRepository.findById(restaurantId)
             .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
 
@@ -80,9 +84,7 @@ public class OrderService {
     orderRepository.save(order);
 
     orderAggregateEventPublisher.publish(order, orderAndEvents.events);
-
     OrderDetails orderDetails = new OrderDetails(consumerId, restaurantId, orderLineItems, order.getOrderTotal());
-
     CreateOrderSagaState data = new CreateOrderSagaState(order.getId(), orderDetails);
     sagaInstanceFactory.create(createOrderSaga, data);
 
@@ -94,6 +96,10 @@ public class OrderService {
 
   private List<OrderLineItem> makeOrderLineItems(List<MenuItemIdAndQuantity> lineItems, Restaurant restaurant) {
     return lineItems.stream().map(li -> {
+      if (li.getQuantity() < 1) {
+        throw new IllegalArgumentException("Invalid quantity for menu with ID: " + li.getMenuItemId());
+      }
+
       MenuItem om = restaurant.findMenuItem(li.getMenuItemId()).orElseThrow(() -> new InvalidMenuItemIdException(li.getMenuItemId()));
       return new OrderLineItem(li.getMenuItemId(), om.getName(), om.getPrice(), li.getQuantity());
     }).collect(toList());
