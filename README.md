@@ -67,3 +67,25 @@ Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi
       return new OrderLineItem(li.getMenuItemId(), om.getName(), om.getPrice(), li.getQuantity());
     }).collect(toList());
   }
+```
+
+| |  |  |  |
+| ---- | ---- | ---- | ---- |
+|TC12|Mengubah order dengan orderID terdaftar dan memasukkan id menu yang terdaftar namun quantity < 1 | Pada class OrderService terdapat method confirmChangeLineItemQuantity namun pada method ini tidak terdapat pengecekan apakah item kurang dari 1|Menambah pengkondisian agar perubahan order hanya dapt dilakukan jika quantitas baru lebih dari 0 pada method confirmChangeLineItemQuantity di OrderService.java
+
+
+```java
+  public Optional<Order> confirmChangeLineItemQuantity(Long orderId, OrderRevision orderRevision) {
+    return orderRepository.findById(orderId).map(order -> {
+        // Periksa apakah quantity baru lebih besar dari atau sama dengan 1
+        if (orderRevision.getRevisedOrderLineItems().stream()
+                .anyMatch(item -> item.getQuantity() < 1)) {
+            throw new IllegalArgumentException("Quantity cannot be less than 1.");
+        }
+        
+        List<OrderDomainEvent> events = order.confirmRevision(orderRevision);
+        orderAggregateEventPublisher.publish(order, events);
+        return order;
+    });
+}
+```
