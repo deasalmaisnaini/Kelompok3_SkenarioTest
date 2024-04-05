@@ -17,7 +17,7 @@ Repo ini merupakan skenario test dan juga pengujian yang dilakukan pada aplikasi
 |TC11|Mengubah order dengan orderId yang terdaftar dan id menu yang tidak terdaftar pada sistem |Sudah ada Order yang tersimpan| orderId = 1{"revisedOrderLineItems": [{"menuItemId": "4","quantity": 3}]}| 404 Error | PASS | - |
 |TC12|Mengubah order dengan orderID terdaftar dan  memasukkan id menu yang terdaftar namun quantity < 1 | Sudah ada Order yang tersimpan | orderId = -1 {"revisedOrderLineItems": [{ "menuItemId": "1", "quantity": -1}]} | {"orderId" : 1, "state" : "APPROVAL_PENDING","orderTotal":"300000"}|FAIL| Terdapat kesalahan dimana saat quantity negatif masih bisa dilakukan perubahan pada order seharusnya jika quantity negatif tidak bisa dilakukan perubahan  |
 |TC13|Membatalkan Order dengan orderId terdaftar dalam sistem | Sudah ada Order yang tersimpan | orderId = 1 | {"orderId" : 1, "state" : "APPROVED","orderTotal":"15000.00"} | PASS | - |
-|TC14|Membatalkan Order dengan orderId tidak terdaftar dalam sistem | - | orderId = 3 | {"orderId" : 1, "state" : "APPROVED","orderTotal":"15000.00"} | PASS | - |
+|TC14|Membatalkan Order dengan orderId tidak terdaftar dalam sistem | Sudah ada Order yang tersimpan | orderId = 3 | 404 Error | PASS | - |
 |TC15|Menguji bahwa order dengan id tersebut berhasil dibatalkan | Sudah berhasil menghapus Order | orderId = 1 | {"orderId" : 1, "state" : "CANCELLED","orderTotal":"15000.00"} | PASS | - |
 
 
