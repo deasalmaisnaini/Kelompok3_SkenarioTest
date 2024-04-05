@@ -22,6 +22,9 @@ public class RevisedOrderLineItem {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 1) {
+            throw new IllegalArgumentException("Quantity cannot be less than 1");
+        }
         this.quantity = quantity;
     }
 
